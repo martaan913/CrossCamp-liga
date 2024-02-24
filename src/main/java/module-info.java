@@ -9,5 +9,6 @@ module com.example.crosscampliga {
 
 
     opens com.example.crosscampliga to javafx.fxml;
+    opens com.example.crosscampliga.storage to javafx.base;
     exports com.example.crosscampliga;
 }

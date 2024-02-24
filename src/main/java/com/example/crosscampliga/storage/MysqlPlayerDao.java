@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.*;
+import java.util.List;
 
 public class MysqlPlayerDao implements PlayerDao {
 
@@ -35,7 +36,7 @@ public class MysqlPlayerDao implements PlayerDao {
 
     @Override
     public Player getByName(String name) {
-        String sql = "select * from player where meno = ?";
+        String sql = "select * from player where name = ?";
 
         try{
             return jdbcTemplate.queryForObject(sql, playerRM(), name);
@@ -47,28 +48,41 @@ public class MysqlPlayerDao implements PlayerDao {
     @Override
     public void add(Player player) {
         if (player.getId() == 0){
-            String query = "insert into player (name, position, goals, assists, saves, failed_saves, Team_idTeam) " +
-                    "values (?,?,?,?,?,?,?)";
+            String query = "insert into player (name, position) " +
+                    "values (?,?)";
             jdbcTemplate.update(new PreparedStatementCreator() {
                 @Override
                 public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
                     PreparedStatement statement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                     statement.setString(1, player.getName());
                     statement.setString(2, player.getPosition());
-                    statement.setInt(3, player.getGoals());
-                    statement.setInt(4, player.getAssists());
-                    statement.setInt(5, player.getSaves());
-                    statement.setInt(6, player.getFailedSaves());
-                    statement.setInt(7, player.getTeamId());
                     return statement;
                 }
             });
         }else{
-            String query = "update player set name = ?, position = ?, goals = ?, assists = ?, saves = ?, failed_saves = ?, " +
-                    "Team_idTeam = ?";
+            String query = "update player set name = ?, position = ?, goals = ?, assists = ?, saves = ?, failed_saves = ? " +
+                    "where idPlayer = ?";
 
             jdbcTemplate.update(query, player.getName(), player.getPosition(), player.getGoals(), player.getAssists(),
-                    player.getSaves(), player.getFailedSaves(), player.getTeamId());
+                    player.getSaves(), player.getFailedSaves(), player.getId());
         }
+    }
+
+    @Override
+    public List<Player> getAll() {
+        String sql = "select * from player where position = ?";
+
+        try{
+            return jdbcTemplate.query(sql, playerRM(), "Hrac");
+        }catch(EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+    @Override
+    public List<Player> getByNameLike(String nameLike) {
+        String sql = "SELECT * FROM player WHERE name LIKE ?";
+        String editedNameLike = "%" + nameLike + "%";
+        return jdbcTemplate.query(sql, playerRM(), editedNameLike);
     }
 }

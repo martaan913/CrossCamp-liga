@@ -94,4 +94,22 @@ public class Player {
     public void setTeamId(int teamId) {
         this.teamId = teamId;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public String toStringComplete() {
+        return "Player{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", position='" + position + '\'' +
+                ", goals=" + goals +
+                ", assists=" + assists +
+                ", saves=" + saves +
+                ", failedSaves=" + failedSaves +
+                ", teamId=" + teamId +
+                '}';
+    }
 }

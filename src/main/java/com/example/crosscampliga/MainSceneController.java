@@ -1,19 +1,40 @@
 package com.example.crosscampliga;
 
 import com.example.crosscampliga.storage.DaoFactory;
+import com.example.crosscampliga.storage.Player;
 import com.example.crosscampliga.storage.PlayerDao;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Font;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
 
 public class MainSceneController {
     @FXML
-    private Button addButton;
+    private Button addGoalButton;
+
+    @FXML
+    private Button addPlayerButton;
+
+    @FXML
+    private ListView<Player> goalAssistListView;
+
+    @FXML
+    private TextField goalAssistTextField;
+
+    @FXML
+    private ListView<Player> goalShooterListView;
+
+    @FXML
+    private TextField goalShooterTextField;
 
     @FXML
     private TextField nameTextField;
@@ -22,11 +43,93 @@ public class MainSceneController {
     private ChoiceBox<String> positionChoiceBox;
 
     @FXML
+    private TableView<Player> assistsStandingsTable;
+    @FXML
+    private TableColumn<Player, String> nameAssistsColumn;
+    @FXML
+    private TableColumn<Player, Integer> numAssistsColumn;
+
+    @FXML
+    private TableView<Player> goalsStandingsTable;
+    @FXML
+    private TableColumn<Player, String> nameGoalsColumn;
+    @FXML
+    private TableColumn<Player, Integer> numGoalsColumn;
+
+    @FXML
+    private Button refreshTableButton;
+
+    PlayerDao playerDao = DaoFactory.INSTANCE.getPlayerDao();
+    private ObservableList<Player> playersModel;
+    private Player selectedShooter;
+    private Player selectedAssist;
+    ObservableList<Player> playersAssist;
+
+
+    @FXML
     private void initialize(){
-
-        PlayerDao playerDao = DaoFactory.INSTANCE.getPlayerDao();
-
         positionChoiceBox.getItems().addAll("Hrac", "Brankar");
+
+        List<Player> players = playerDao.getAll();
+        playersModel = FXCollections.observableList(players);
+        goalShooterListView.setItems(playersModel);
+        goalAssistListView.setItems(playersModel);
+
+        goalShooterTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            List<Player> playersFiltered = playerDao.getByNameLike(newValue);
+            ObservableList<Player> observablePlayersFiltered = FXCollections.observableArrayList(playersFiltered);
+            goalShooterListView.setItems(observablePlayersFiltered);
+        });
+
+        goalAssistTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            List<Player> playersFiltered = playerDao.getByNameLike(newValue);
+            ObservableList<Player> observablePlayersFiltered = FXCollections.observableArrayList(playersFiltered);
+            goalAssistListView.setItems(observablePlayersFiltered);
+        });
+
+        goalShooterListView.setCellFactory(param -> new ListCell<Player>() {
+            @Override
+            protected void updateItem(Player shooter, boolean empty) {
+                super.updateItem(shooter, empty);
+
+                if (empty || shooter == null) {
+                    setText(null);
+                } else {
+                    setText(shooter.toString());
+                    setFont(new Font(18));
+                    setOnMouseClicked(mouseEvent -> handleShooterListClick(mouseEvent));
+                }
+            }
+        });
+
+        goalAssistListView.setCellFactory(param -> new ListCell<Player>() {
+            @Override
+            protected void updateItem(Player shooter, boolean empty) {
+                super.updateItem(shooter, empty);
+
+                if (empty || shooter == null) {
+                    setText(null);
+                } else {
+                    setText(shooter.toString());
+                    setFont(new Font(18));
+                    setOnMouseClicked(mouseEvent -> handleAssistListClick(mouseEvent));
+                }
+            }
+        });
+
+        nameGoalsColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        numGoalsColumn.setCellValueFactory(new PropertyValueFactory<>("goals"));
+        goalsStandingsTable.setItems(FXCollections.observableList(playerDao.getAll()));
+        numGoalsColumn.setSortType(TableColumn.SortType.DESCENDING);
+        goalsStandingsTable.getSortOrder().add(numGoalsColumn);
+        goalsStandingsTable.sort();
+
+        nameAssistsColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        numAssistsColumn.setCellValueFactory(new PropertyValueFactory<>("assists"));
+        assistsStandingsTable.setItems(FXCollections.observableList(playerDao.getAll()));
+        numAssistsColumn.setSortType(TableColumn.SortType.DESCENDING);
+        assistsStandingsTable.getSortOrder().add(numAssistsColumn);
+        assistsStandingsTable.sort();
     }
 
     @FXML
@@ -48,8 +151,91 @@ public class MainSceneController {
             alert.setContentText("Zadaj poziciu");
 
             alert.showAndWait();
+
             return;
         }
 
+        Player player = new Player();
+        player.setName(nameTextField.getText());
+        player.setPosition(positionChoiceBox.getValue());
+        playerDao.add(player);
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setContentText("Hráč bol pridaný");
+
+        alert.showAndWait();
+
+    }
+
+    @FXML
+    void onAddGoal(ActionEvent event) {
+        if (selectedShooter == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Zle oznaceny strelec!");
+
+            alert.showAndWait();
+
+            return;
+        }
+
+        if (selectedAssist != null && selectedShooter.getId() == selectedAssist.getId()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Strelec a nahravac nemoze byt rovnaky clovek!");
+
+            alert.showAndWait();
+
+            return;
+        }
+
+        selectedShooter.setGoals(selectedShooter.getGoals() + 1);
+        playerDao.add(selectedShooter);
+        if (selectedAssist != null) {
+            selectedAssist.setAssists(selectedAssist.getAssists() + 1);
+            playerDao.add(selectedAssist);
+        }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setContentText(selectedShooter + " " + selectedAssist);
+
+        alert.showAndWait();
+
+        selectedShooter = null;
+        selectedAssist = null;
+    }
+
+    @FXML
+    void onRefreshTable(ActionEvent event) {
+        nameGoalsColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        numGoalsColumn.setCellValueFactory(new PropertyValueFactory<>("goals"));
+        goalsStandingsTable.setItems(FXCollections.observableList(playerDao.getAll()));
+        numGoalsColumn.setSortType(TableColumn.SortType.DESCENDING);
+        goalsStandingsTable.getSortOrder().add(numGoalsColumn);
+        goalsStandingsTable.sort();
+
+        nameAssistsColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        numAssistsColumn.setCellValueFactory(new PropertyValueFactory<>("assists"));
+        assistsStandingsTable.setItems(FXCollections.observableList(playerDao.getAll()));
+        numAssistsColumn.setSortType(TableColumn.SortType.DESCENDING);
+        assistsStandingsTable.getSortOrder().add(numAssistsColumn);
+        assistsStandingsTable.sort();
+    }
+
+    private void handleShooterListClick(MouseEvent mouseEvent) {
+        Player clickedPlayer = goalShooterListView.getSelectionModel().getSelectedItem();
+        if(clickedPlayer != null){
+            selectedShooter = playerDao.getByName(clickedPlayer.getName());
+        }
+    }
+    private void handleAssistListClick(MouseEvent mouseEvent) {
+        Player clickedPlayer = goalAssistListView.getSelectionModel().getSelectedItem();
+        if(clickedPlayer != null){
+            selectedAssist = playerDao.getByName(clickedPlayer.getName());
+        }
     }
 }
