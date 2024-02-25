@@ -78,5 +78,20 @@
          </font>
       </Label>
       <Button fx:id="refreshTableButton" layoutX="1440.0" layoutY="689.0" mnemonicParsing="false" onAction="#onRefreshTable" text="Aktualizuj tabulku!" />
+      <ChoiceBox fx:id="goalieChoiceBox" layoutX="53.0" layoutY="290.0" prefWidth="150.0" />
+      <Button fx:id="addFirstGoalieButton" layoutX="243.0" layoutY="290.0" mnemonicParsing="false" onAction="#onAddFirstGoalie" text="Pridaj 1. brankara" />
+      <Button fx:id="addSecondGoalieButton" layoutX="395.0" layoutY="290.0" mnemonicParsing="false" onAction="#onAddSecondGoalie" text="Pridaj 2. brankara" />
+      <Button fx:id="addFirstGoalieSaveButton" layoutX="102.0" layoutY="441.0" mnemonicParsing="false" onAction="#onAddFirstGoalieSave" text="Zakrok" />
+      <Button fx:id="addSecondGoalieSaveButton" layoutX="367.0" layoutY="441.0" mnemonicParsing="false" onAction="#onAddSecondGoalieSave" text="Zakrok" />
+      <Label fx:id="firstGoalieNameLabel" layoutX="37.0" layoutY="391.0" text="Meno prveho brankara">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="secondGoalieNameLabel" layoutX="298.0" layoutY="391.0" text="Meno druheho brankara">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

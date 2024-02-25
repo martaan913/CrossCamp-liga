@@ -85,4 +85,15 @@ public class MysqlPlayerDao implements PlayerDao {
         String editedNameLike = "%" + nameLike + "%";
         return jdbcTemplate.query(sql, playerRM(), editedNameLike);
     }
+
+    @Override
+    public List<Player> getAllGoalies() {
+        String sql = "select * from player where position = ?";
+
+        try{
+            return jdbcTemplate.query(sql, playerRM(), "Brankar");
+        }catch(EmptyResultDataAccessException e){
+            return null;
+        }
+    }
 }

@@ -59,11 +59,30 @@ public class MainSceneController {
     @FXML
     private Button refreshTableButton;
 
+    @FXML
+    private Button addFirstGoalieButton;
+    @FXML
+    private Button addFirstGoalieSaveButton;
+    @FXML
+    private Label firstGoalieNameLabel;
+
+    @FXML
+    private Button addSecondGoalieButton;
+    @FXML
+    private Button addSecondGoalieSaveButton;
+    @FXML
+    private Label secondGoalieNameLabel;
+
+    @FXML
+    private ChoiceBox<Player> goalieChoiceBox;
+
     PlayerDao playerDao = DaoFactory.INSTANCE.getPlayerDao();
     private ObservableList<Player> playersModel;
     private Player selectedShooter;
     private Player selectedAssist;
     ObservableList<Player> playersAssist;
+    private Player firstGoalie;
+    private Player secondGoalie;
 
 
     @FXML
@@ -130,6 +149,11 @@ public class MainSceneController {
         numAssistsColumn.setSortType(TableColumn.SortType.DESCENDING);
         assistsStandingsTable.getSortOrder().add(numAssistsColumn);
         assistsStandingsTable.sort();
+
+        ObservableList<Player> observableGoalies = FXCollections.observableArrayList(
+                playerDao.getAllGoalies()
+        );
+        goalieChoiceBox.setItems(observableGoalies);
     }
 
     @FXML
@@ -166,6 +190,15 @@ public class MainSceneController {
 
         alert.showAndWait();
 
+        ObservableList<Player> observableGoalies = FXCollections.observableArrayList(
+                playerDao.getAllGoalies()
+        );
+        goalieChoiceBox.setItems(observableGoalies);
+
+        List<Player> players = playerDao.getAll();
+        playersModel = FXCollections.observableList(players);
+        goalShooterListView.setItems(playersModel);
+        goalAssistListView.setItems(playersModel);
     }
 
     @FXML
@@ -224,6 +257,61 @@ public class MainSceneController {
         numAssistsColumn.setSortType(TableColumn.SortType.DESCENDING);
         assistsStandingsTable.getSortOrder().add(numAssistsColumn);
         assistsStandingsTable.sort();
+    }
+
+    @FXML
+    void onAddFirstGoalie(ActionEvent event) {
+        firstGoalie = goalieChoiceBox.getValue();
+        if (secondGoalie!= null && secondGoalie == goalieChoiceBox.getValue()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("1. a 2. brankar nemozu byt rovnaky brankar!");
+
+            alert.showAndWait();
+
+            return;
+        }
+        if (firstGoalie != null) {
+            firstGoalieNameLabel.setText(firstGoalie.getName());
+        }
+    }
+
+    @FXML
+    void onAddFirstGoalieSave(ActionEvent event) {
+        if (firstGoalie != null) {
+            firstGoalie.setSaves(firstGoalie.getSaves() + 1);
+            playerDao.add(firstGoalie);
+        }else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Musis zadat brankara!");
+
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    void onAddSecondGoalie(ActionEvent event) {
+        if (firstGoalie == goalieChoiceBox.getValue()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("1. a 2. brankar nemozu byt rovnaky brankar!");
+
+            alert.showAndWait();
+
+            return;
+        }
+        secondGoalie = goalieChoiceBox.getValue();
+        secondGoalieNameLabel.setText(secondGoalie.getName());
+    }
+
+    @FXML
+    void onAddSecondGoalieSave(ActionEvent event) {
+        secondGoalie.setSaves(secondGoalie.getSaves() + 1);
+        playerDao.add(secondGoalie);
     }
 
     private void handleShooterListClick(MouseEvent mouseEvent) {

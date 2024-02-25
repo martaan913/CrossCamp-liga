@@ -7,4 +7,5 @@ public interface PlayerDao {
     void add(Player player);
     List<Player> getAll();
     List<Player> getByNameLike(String nameLike);
+    List<Player> getAllGoalies();
 }
