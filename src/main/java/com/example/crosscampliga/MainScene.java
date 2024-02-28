@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class MainScene extends Application {
@@ -13,9 +14,11 @@ public class MainScene extends Application {
         loader.setController(controller);
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
+//        scene.getStylesheets().add(getClass().getResource("style/main.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.setTitle("CrossCamp - Liga");
         primaryStage.setResizable(true);
+        primaryStage.getIcons().add(new javafx.scene.image.Image("images/logo.png"));
         primaryStage.show();
     }
     public static void main(String[] args) {

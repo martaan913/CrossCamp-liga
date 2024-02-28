@@ -10,7 +10,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="128.0" layoutY="73.0" text="Pridanie nového hráča">
          <font>
@@ -35,54 +36,54 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="110.0" layoutY="640.0" text="Gól">
+      <Label layoutX="110.0" layoutY="493.0" text="Gól">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <ListView fx:id="goalShooterListView" layoutX="13.0" layoutY="675.0" prefHeight="352.0" prefWidth="230.0" />
-      <TextField fx:id="goalShooterTextField" layoutX="13.0" layoutY="1027.0" prefHeight="26.0" prefWidth="230.0" />
-      <ListView fx:id="goalAssistListView" layoutX="278.0" layoutY="675.0" prefHeight="352.0" prefWidth="230.0" />
-      <TextField fx:id="goalAssistTextField" layoutX="278.0" layoutY="1027.0" prefHeight="26.0" prefWidth="230.0" />
-      <Label layoutX="340.0" layoutY="640.0" text="Asistencia">
+      <ListView fx:id="goalShooterListView" layoutX="13.0" layoutY="528.0" prefHeight="232.0" prefWidth="230.0" />
+      <TextField fx:id="goalShooterTextField" layoutX="13.0" layoutY="760.0" prefHeight="26.0" prefWidth="230.0" />
+      <ListView fx:id="goalAssistListView" layoutX="249.0" layoutY="528.0" prefHeight="232.0" prefWidth="230.0" />
+      <TextField fx:id="goalAssistTextField" layoutX="249.0" layoutY="760.0" prefHeight="26.0" prefWidth="230.0" />
+      <Label layoutX="314.0" layoutY="493.0" text="Asistencia">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="addGoalButton" layoutX="548.0" layoutY="1028.0" mnemonicParsing="false" onAction="#onAddGoal" text="GÓL!" />
+      <Button fx:id="addGoalFirstGoalieButton" layoutX="107.0" layoutY="454.0" mnemonicParsing="false" onAction="#onAddGoalFirstGoalie" text="GÓL!" />
       <Label layoutX="148.0" layoutY="228.0" text="Zákroky brankárov">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <TableView fx:id="goalsStandingsTable" layoutX="1047.0" layoutY="719.0" prefHeight="338.0" prefWidth="433.0">
+      <Label layoutX="970.0" layoutY="73.0" text="Najlepsi strelec">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TableView fx:id="goalsStandingsTable" layoutX="833.0" layoutY="111.0" prefHeight="112.0" prefWidth="433.0">
         <columns>
           <TableColumn fx:id="nameGoalsColumn" prefWidth="323.0" text="Meno" />
           <TableColumn fx:id="numGoalsColumn" prefWidth="109.0" text="Goly" />
         </columns>
       </TableView>
-      <TableView fx:id="assistsStandingsTable" layoutX="1514.0" layoutY="719.0" prefHeight="338.0" prefWidth="390.0">
+      <Label layoutX="957.0" layoutY="246.0" text="Najlepsi nahravac">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TableView fx:id="assistsStandingsTable" layoutX="834.0" layoutY="301.0" prefHeight="139.0" prefWidth="433.0">
         <columns>
           <TableColumn fx:id="nameAssistsColumn" prefWidth="276.0" text="Meno" />
-          <TableColumn fx:id="numAssistsColumn" prefWidth="113.0" text="Asistencie" />
+          <TableColumn fx:id="numAssistsColumn" prefWidth="156.0" text="Asistencie" />
         </columns>
       </TableView>
-      <Label layoutX="1184.0" layoutY="684.0" text="Najlepsi strelec">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="1629.0" layoutY="684.0" text="Najlepsi nahravac">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Button fx:id="refreshTableButton" layoutX="1440.0" layoutY="689.0" mnemonicParsing="false" onAction="#onRefreshTable" text="Aktualizuj tabulku!" />
+      <Button fx:id="refreshTableButton" layoutX="697.0" layoutY="454.0" mnemonicParsing="false" onAction="#onRefreshTable" prefHeight="0.0" prefWidth="122.0" text="Aktualizuj statistiku!" />
       <ChoiceBox fx:id="goalieChoiceBox" layoutX="53.0" layoutY="290.0" prefWidth="150.0" />
       <Button fx:id="addFirstGoalieButton" layoutX="243.0" layoutY="290.0" mnemonicParsing="false" onAction="#onAddFirstGoalie" text="Pridaj 1. brankara" />
       <Button fx:id="addSecondGoalieButton" layoutX="395.0" layoutY="290.0" mnemonicParsing="false" onAction="#onAddSecondGoalie" text="Pridaj 2. brankara" />
-      <Button fx:id="addFirstGoalieSaveButton" layoutX="102.0" layoutY="441.0" mnemonicParsing="false" onAction="#onAddFirstGoalieSave" text="Zakrok" />
-      <Button fx:id="addSecondGoalieSaveButton" layoutX="367.0" layoutY="441.0" mnemonicParsing="false" onAction="#onAddSecondGoalieSave" text="Zakrok" />
+      <Button fx:id="addFirstGoalieSaveButton" layoutX="102.0" layoutY="428.0" mnemonicParsing="false" onAction="#onAddFirstGoalieSave" text="Zakrok" />
+      <Button fx:id="addSecondGoalieSaveButton" layoutX="369.0" layoutY="428.0" mnemonicParsing="false" onAction="#onAddSecondGoalieSave" text="Zakrok" />
       <Label fx:id="firstGoalieNameLabel" layoutX="37.0" layoutY="391.0" text="Meno prveho brankara">
          <font>
             <Font size="18.0" />
@@ -93,5 +94,17 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <TableView fx:id="goalieSavesTable" layoutX="834.0" layoutY="500.0" prefHeight="112.0" prefWidth="433.0">
+         <columns>
+            <TableColumn fx:id="nameGoalieColumn" prefWidth="323.0" text="Meno" />
+            <TableColumn fx:id="percentageSavesColumn" prefWidth="109.0" text="zakroky %" />
+         </columns>
+      </TableView>
+      <Label layoutX="946.0" layoutY="449.0" text="Statistika brankarov">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="addGoalSecondGoalieButton" layoutX="374.0" layoutY="454.0" mnemonicParsing="false" onAction="#onAddGoalSecondGoalie" text="GÓL!" />
    </children>
 </AnchorPane>

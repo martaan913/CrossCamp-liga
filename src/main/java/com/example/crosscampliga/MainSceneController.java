@@ -3,6 +3,8 @@ package com.example.crosscampliga;
 import com.example.crosscampliga.storage.DaoFactory;
 import com.example.crosscampliga.storage.Player;
 import com.example.crosscampliga.storage.PlayerDao;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -18,8 +20,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class MainSceneController {
+
     @FXML
-    private Button addGoalButton;
+    private Button addGoalFirstGoalieButton;
+
+    @FXML
+    private Button addGoalSecondGoalieButton;
 
     @FXML
     private Button addPlayerButton;
@@ -76,11 +82,19 @@ public class MainSceneController {
     @FXML
     private ChoiceBox<Player> goalieChoiceBox;
 
+    @FXML
+    private TableView<Player> goalieSavesTable;
+    @FXML
+    private TableColumn<Player, String> nameGoalieColumn;
+    @FXML
+    private TableColumn<Player, Double> percentageSavesColumn;
+
     PlayerDao playerDao = DaoFactory.INSTANCE.getPlayerDao();
     private ObservableList<Player> playersModel;
     private Player selectedShooter;
     private Player selectedAssist;
-    ObservableList<Player> playersAssist;
+    private ObservableList<Player> playersAssist;
+    private ObservableList<Player> goaliesModel;
     private Player firstGoalie;
     private Player secondGoalie;
 
@@ -150,10 +164,26 @@ public class MainSceneController {
         assistsStandingsTable.getSortOrder().add(numAssistsColumn);
         assistsStandingsTable.sort();
 
-        ObservableList<Player> observableGoalies = FXCollections.observableArrayList(
-                playerDao.getAllGoalies()
-        );
-        goalieChoiceBox.setItems(observableGoalies);
+        List<Player> goalies = playerDao.getAllGoalies();
+        goaliesModel = FXCollections.observableList(goalies);
+
+        nameGoalieColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        percentageSavesColumn.setCellValueFactory(cellData -> {
+            Player player = cellData.getValue();
+
+            double percentage = 0;
+            if (player.getFailedSaves() != 0) {
+                percentage = player.getSaves() == 0 ? 0 :
+                        Math.round(((double) player.getSaves() / (player.getSaves() + player.getFailedSaves())) * 100);
+            }else{
+                percentage = player.getSaves() == 0 ? 0 : 100;
+            }
+
+            return new SimpleDoubleProperty(percentage).asObject();
+        });
+        goalieSavesTable.setItems(goaliesModel);
+
+        goalieChoiceBox.setItems(goaliesModel);
     }
 
     @FXML
@@ -190,10 +220,10 @@ public class MainSceneController {
 
         alert.showAndWait();
 
-        ObservableList<Player> observableGoalies = FXCollections.observableArrayList(
+        goaliesModel = FXCollections.observableArrayList(
                 playerDao.getAllGoalies()
         );
-        goalieChoiceBox.setItems(observableGoalies);
+        goalieChoiceBox.setItems(goaliesModel);
 
         List<Player> players = playerDao.getAll();
         playersModel = FXCollections.observableList(players);
@@ -202,7 +232,7 @@ public class MainSceneController {
     }
 
     @FXML
-    void onAddGoal(ActionEvent event) {
+    void onAddGoalFirstGoalie(ActionEvent event) {
         if (selectedShooter == null){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
@@ -225,12 +255,25 @@ public class MainSceneController {
             return;
         }
 
+        if(firstGoalie == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Vyber prveho brankara!");
+
+            alert.showAndWait();
+
+            return;
+        }
+
         selectedShooter.setGoals(selectedShooter.getGoals() + 1);
         playerDao.add(selectedShooter);
         if (selectedAssist != null) {
             selectedAssist.setAssists(selectedAssist.getAssists() + 1);
             playerDao.add(selectedAssist);
         }
+        firstGoalie.setFailedSaves(firstGoalie.getFailedSaves() + 1);
+        playerDao.add(firstGoalie);
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation Dialog");
@@ -242,6 +285,59 @@ public class MainSceneController {
         selectedAssist = null;
     }
 
+    @FXML
+    void onAddGoalSecondGoalie(ActionEvent event) {
+        if (selectedShooter == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Zle oznaceny strelec!");
+
+            alert.showAndWait();
+
+            return;
+        }
+
+        if (selectedAssist != null && selectedShooter.getId() == selectedAssist.getId()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Strelec a nahravac nemoze byt rovnaky clovek!");
+
+            alert.showAndWait();
+
+            return;
+        }
+
+        if(secondGoalie == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Vyber druheho brankara!");
+
+            alert.showAndWait();
+
+            return;
+        }
+
+        selectedShooter.setGoals(selectedShooter.getGoals() + 1);
+        playerDao.add(selectedShooter);
+        if (selectedAssist != null) {
+            selectedAssist.setAssists(selectedAssist.getAssists() + 1);
+            playerDao.add(selectedAssist);
+        }
+        secondGoalie.setFailedSaves(secondGoalie.getFailedSaves() + 1);
+        playerDao.add(secondGoalie);
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setContentText(selectedShooter + " " + selectedAssist);
+
+        alert.showAndWait();
+
+        selectedShooter = null;
+        selectedAssist = null;
+    }
     @FXML
     void onRefreshTable(ActionEvent event) {
         nameGoalsColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -257,6 +353,10 @@ public class MainSceneController {
         numAssistsColumn.setSortType(TableColumn.SortType.DESCENDING);
         assistsStandingsTable.getSortOrder().add(numAssistsColumn);
         assistsStandingsTable.sort();
+
+        List<Player> goalies = playerDao.getAllGoalies();
+        goaliesModel = FXCollections.observableList(goalies);
+        goalieSavesTable.setItems(goaliesModel);
     }
 
     @FXML
