@@ -4,12 +4,9 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -56,29 +53,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="970.0" layoutY="73.0" text="Najlepsi strelec">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <TableView fx:id="goalsStandingsTable" layoutX="833.0" layoutY="111.0" prefHeight="112.0" prefWidth="433.0">
-        <columns>
-          <TableColumn fx:id="nameGoalsColumn" prefWidth="323.0" text="Meno" />
-          <TableColumn fx:id="numGoalsColumn" prefWidth="109.0" text="Goly" />
-        </columns>
-      </TableView>
-      <Label layoutX="957.0" layoutY="246.0" text="Najlepsi nahravac">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <TableView fx:id="assistsStandingsTable" layoutX="834.0" layoutY="301.0" prefHeight="139.0" prefWidth="433.0">
-        <columns>
-          <TableColumn fx:id="nameAssistsColumn" prefWidth="276.0" text="Meno" />
-          <TableColumn fx:id="numAssistsColumn" prefWidth="156.0" text="Asistencie" />
-        </columns>
-      </TableView>
-      <Button fx:id="refreshTableButton" layoutX="697.0" layoutY="454.0" mnemonicParsing="false" onAction="#onRefreshTable" prefHeight="0.0" prefWidth="122.0" text="Aktualizuj statistiku!" />
+      <Button fx:id="refreshTableButton" layoutX="597.0" layoutY="761.0" mnemonicParsing="false" onAction="#onRefreshTable" prefHeight="0.0" prefWidth="122.0" text="Otvor statistiku" />
       <ChoiceBox fx:id="goalieChoiceBox" layoutX="53.0" layoutY="290.0" prefWidth="150.0" />
       <Button fx:id="addFirstGoalieButton" layoutX="243.0" layoutY="290.0" mnemonicParsing="false" onAction="#onAddFirstGoalie" text="Pridaj 1. brankara" />
       <Button fx:id="addSecondGoalieButton" layoutX="395.0" layoutY="290.0" mnemonicParsing="false" onAction="#onAddSecondGoalie" text="Pridaj 2. brankara" />
@@ -94,17 +69,13 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TableView fx:id="goalieSavesTable" layoutX="834.0" layoutY="500.0" prefHeight="112.0" prefWidth="433.0">
-         <columns>
-            <TableColumn fx:id="nameGoalieColumn" prefWidth="323.0" text="Meno" />
-            <TableColumn fx:id="percentageSavesColumn" prefWidth="109.0" text="zakroky %" />
-         </columns>
-      </TableView>
-      <Label layoutX="946.0" layoutY="449.0" text="Statistika brankarov">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
       <Button fx:id="addGoalSecondGoalieButton" layoutX="374.0" layoutY="454.0" mnemonicParsing="false" onAction="#onAddGoalSecondGoalie" text="GÓL!" />
+      <Button fx:id="openScoreBoardButton" layoutX="954.0" layoutY="138.0" mnemonicParsing="false" onAction="#onOpenScoreBoard" text="Spusti cas" />
+      <TextField fx:id="timeTextField" layoutX="746.0" layoutY="216.0" />
+      <Label layoutX="807.0" layoutY="192.0" text="Cas zapasu" />
+      <Button fx:id="setTimeButton" layoutX="902.0" layoutY="216.0" mnemonicParsing="false" onAction="#onSetTime" text="Nastav cas" />
+      <Button fx:id="removeFirstTeamGoalButton" layoutX="811.0" layoutY="350.0" mnemonicParsing="false" onAction="#onRemoveFirstTeamGoal" text="odober gol" />
+      <Button layoutX="1124.0" layoutY="350.0" mnemonicParsing="false" text="odober gol" />
+      <Button fx:id="stopTimeButton" layoutX="1066.0" layoutY="216.0" mnemonicParsing="false" onAction="#onStopTime" text="Stopni cas" />
    </children>
 </AnchorPane>

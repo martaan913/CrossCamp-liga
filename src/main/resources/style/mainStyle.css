@@ -1,0 +1,8 @@
+.root{
+    -fx-background-color: linear-gradient(to bottom, #222222, #333333);
+    -fx-font-family: Bahnschrift;
+}
+
+.label{
+    -fx-text-fill: #F46424;
+}

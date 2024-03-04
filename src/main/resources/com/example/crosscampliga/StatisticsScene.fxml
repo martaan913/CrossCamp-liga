@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="goalsStandingsTable" layoutX="14.0" layoutY="26.0" prefHeight="112.0" prefWidth="433.0">
+         <columns>
+            <TableColumn fx:id="nameGoalsColumn" editable="false" prefWidth="323.0" resizable="false" sortable="false" text="Meno" />
+            <TableColumn fx:id="numGoalsColumn" editable="false" prefWidth="109.0" resizable="false" text="Goly" />
+         </columns>
+      </TableView>
+      <TableView fx:id="assistsStandingsTable" layoutX="14.0" layoutY="158.0" prefHeight="139.0" prefWidth="433.0">
+         <columns>
+            <TableColumn fx:id="nameAssistsColumn" editable="false" prefWidth="317.0" resizable="false" sortable="false" text="Meno" />
+            <TableColumn fx:id="numAssistsColumn" editable="false" maxWidth="307.0" prefWidth="115.0" resizable="false" text="Asistencie" />
+         </columns>
+      </TableView>
+      <TableView fx:id="goalieSavesTable" layoutX="21.0" layoutY="274.0" prefHeight="112.0" prefWidth="433.0">
+         <columns>
+            <TableColumn fx:id="nameGoalieColumn" editable="false" prefWidth="323.0" resizable="false" sortable="false" text="Meno" />
+            <TableColumn fx:id="percentageSavesColumn" editable="false" prefWidth="109.0" resizable="false" text="zakroky %" />
+         </columns>
+      </TableView>
+      <Label layoutX="426.0" layoutY="57.0" text="Najlepsi strelec">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="454.0" layoutY="193.0" text="Najlepsi nahravac">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="454.0" layoutY="313.0" text="Statistika brankarov">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

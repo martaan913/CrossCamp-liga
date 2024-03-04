@@ -10,11 +10,16 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -25,10 +30,21 @@ public class MainSceneController {
     private Button addGoalFirstGoalieButton;
 
     @FXML
+    private Button setTimeButton;
+    @FXML
+    private TextField timeTextField;
+    @FXML
+    private Button stopTimeButton;
+    @FXML
+    private Button removeFirstTeamGoalButton;
+    @FXML
     private Button addGoalSecondGoalieButton;
 
     @FXML
     private Button addPlayerButton;
+
+    @FXML
+    private Button openScoreBoardButton;
 
     @FXML
     private ListView<Player> goalAssistListView;
@@ -48,19 +64,6 @@ public class MainSceneController {
     @FXML
     private ChoiceBox<String> positionChoiceBox;
 
-    @FXML
-    private TableView<Player> assistsStandingsTable;
-    @FXML
-    private TableColumn<Player, String> nameAssistsColumn;
-    @FXML
-    private TableColumn<Player, Integer> numAssistsColumn;
-
-    @FXML
-    private TableView<Player> goalsStandingsTable;
-    @FXML
-    private TableColumn<Player, String> nameGoalsColumn;
-    @FXML
-    private TableColumn<Player, Integer> numGoalsColumn;
 
     @FXML
     private Button refreshTableButton;
@@ -82,12 +85,7 @@ public class MainSceneController {
     @FXML
     private ChoiceBox<Player> goalieChoiceBox;
 
-    @FXML
-    private TableView<Player> goalieSavesTable;
-    @FXML
-    private TableColumn<Player, String> nameGoalieColumn;
-    @FXML
-    private TableColumn<Player, Double> percentageSavesColumn;
+
 
     PlayerDao playerDao = DaoFactory.INSTANCE.getPlayerDao();
     private ObservableList<Player> playersModel;
@@ -97,7 +95,7 @@ public class MainSceneController {
     private ObservableList<Player> goaliesModel;
     private Player firstGoalie;
     private Player secondGoalie;
-
+    private ScoreBoardSceneController scoreBoardSceneController;
 
     @FXML
     private void initialize(){
@@ -150,39 +148,8 @@ public class MainSceneController {
             }
         });
 
-        nameGoalsColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        numGoalsColumn.setCellValueFactory(new PropertyValueFactory<>("goals"));
-        goalsStandingsTable.setItems(FXCollections.observableList(playerDao.getAll()));
-        numGoalsColumn.setSortType(TableColumn.SortType.DESCENDING);
-        goalsStandingsTable.getSortOrder().add(numGoalsColumn);
-        goalsStandingsTable.sort();
-
-        nameAssistsColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        numAssistsColumn.setCellValueFactory(new PropertyValueFactory<>("assists"));
-        assistsStandingsTable.setItems(FXCollections.observableList(playerDao.getAll()));
-        numAssistsColumn.setSortType(TableColumn.SortType.DESCENDING);
-        assistsStandingsTable.getSortOrder().add(numAssistsColumn);
-        assistsStandingsTable.sort();
-
         List<Player> goalies = playerDao.getAllGoalies();
         goaliesModel = FXCollections.observableList(goalies);
-
-        nameGoalieColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        percentageSavesColumn.setCellValueFactory(cellData -> {
-            Player player = cellData.getValue();
-
-            double percentage = 0;
-            if (player.getFailedSaves() != 0) {
-                percentage = player.getSaves() == 0 ? 0 :
-                        Math.round(((double) player.getSaves() / (player.getSaves() + player.getFailedSaves())) * 100);
-            }else{
-                percentage = player.getSaves() == 0 ? 0 : 100;
-            }
-
-            return new SimpleDoubleProperty(percentage).asObject();
-        });
-        goalieSavesTable.setItems(goaliesModel);
-
         goalieChoiceBox.setItems(goaliesModel);
     }
 
@@ -283,6 +250,8 @@ public class MainSceneController {
 
         selectedShooter = null;
         selectedAssist = null;
+
+        scoreBoardSceneController.firstTeamGoal();
     }
 
     @FXML
@@ -340,23 +309,23 @@ public class MainSceneController {
     }
     @FXML
     void onRefreshTable(ActionEvent event) {
-        nameGoalsColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        numGoalsColumn.setCellValueFactory(new PropertyValueFactory<>("goals"));
-        goalsStandingsTable.setItems(FXCollections.observableList(playerDao.getAll()));
-        numGoalsColumn.setSortType(TableColumn.SortType.DESCENDING);
-        goalsStandingsTable.getSortOrder().add(numGoalsColumn);
-        goalsStandingsTable.sort();
-
-        nameAssistsColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        numAssistsColumn.setCellValueFactory(new PropertyValueFactory<>("assists"));
-        assistsStandingsTable.setItems(FXCollections.observableList(playerDao.getAll()));
-        numAssistsColumn.setSortType(TableColumn.SortType.DESCENDING);
-        assistsStandingsTable.getSortOrder().add(numAssistsColumn);
-        assistsStandingsTable.sort();
-
-        List<Player> goalies = playerDao.getAllGoalies();
-        goaliesModel = FXCollections.observableList(goalies);
-        goalieSavesTable.setItems(goaliesModel);
+//        nameGoalsColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+//        numGoalsColumn.setCellValueFactory(new PropertyValueFactory<>("goals"));
+//        goalsStandingsTable.setItems(FXCollections.observableList(playerDao.getAll()));
+//        numGoalsColumn.setSortType(TableColumn.SortType.DESCENDING);
+//        goalsStandingsTable.getSortOrder().add(numGoalsColumn);
+//        goalsStandingsTable.sort();
+//
+//        nameAssistsColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+//        numAssistsColumn.setCellValueFactory(new PropertyValueFactory<>("assists"));
+//        assistsStandingsTable.setItems(FXCollections.observableList(playerDao.getAll()));
+//        numAssistsColumn.setSortType(TableColumn.SortType.DESCENDING);
+//        assistsStandingsTable.getSortOrder().add(numAssistsColumn);
+//        assistsStandingsTable.sort();
+//
+//        List<Player> goalies = playerDao.getAllGoalies();
+//        goaliesModel = FXCollections.observableList(goalies);
+//        goalieSavesTable.setItems(goaliesModel);
     }
 
     @FXML
@@ -425,5 +394,36 @@ public class MainSceneController {
         if(clickedPlayer != null){
             selectedAssist = playerDao.getByName(clickedPlayer.getName());
         }
+    }
+
+    public void setScoreBoardSceneController(ScoreBoardSceneController controller) {
+        this.scoreBoardSceneController = controller;
+    }
+
+
+    @FXML
+    void onOpenScoreBoard(ActionEvent event) {
+        if (scoreBoardSceneController != null) {
+            scoreBoardSceneController.startCountdown();
+            scoreBoardSceneController.startGame();
+        }
+    }
+
+    @FXML
+    void onSetTime(){
+        String[] cas = timeTextField.getText().split(":");
+        int min = Integer.parseInt(cas[0]);
+        int sec = Integer.parseInt(cas[1]);
+        scoreBoardSceneController.setTime(min, sec);
+    }
+
+    @FXML
+    void onStopTime(){
+        scoreBoardSceneController.stopCountdown();
+    }
+
+    @FXML
+    void onRemoveFirstTeamGoal(){
+        scoreBoardSceneController.removeFirstTeamGoal();
     }
 }

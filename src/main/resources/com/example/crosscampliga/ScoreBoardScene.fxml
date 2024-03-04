@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="text" layoutX="570.0" layoutY="14.0" text="SCOREBOARD">
+         <font>
+            <Font size="36.0" />
+         </font></Label>
+      <Label fx:id="timeLeftLabel" layoutX="606.0" layoutY="73.0" text="Time">
+         <font>
+            <Font size="72.0" />
+         </font>
+      </Label>
+      <Label fx:id="firstTeamLabel" layoutX="325.0" layoutY="206.0" text="FirstTeam">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="firstTeamScore" layoutX="337.0" layoutY="313.0" text="0">
+         <font>
+            <Font size="146.0" />
+         </font>
+      </Label>
+      <Label fx:id="secondTeamScore" layoutX="1017.0" layoutY="313.0" text="0">
+         <font>
+            <Font size="146.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

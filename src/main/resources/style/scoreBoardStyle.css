@@ -1,0 +1,13 @@
+.root{
+    -fx-background-color: linear-gradient(to bottom, #222222, #333333);
+}
+
+.label{
+    -fx-font-family: SevenSegment;
+    -fx-text-fill: #F46424;
+}
+
+@font-face {
+    font-family: "SevenSegment";
+    src: url("../font/SevenSegment.ttf");
+}
