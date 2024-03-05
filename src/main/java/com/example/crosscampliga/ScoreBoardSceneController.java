@@ -1,17 +1,27 @@
 package com.example.crosscampliga;
 
+import com.example.crosscampliga.storage.Player;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ScoreBoardSceneController {
 
     @FXML
     private Label firstTeamLabel;
+
+    @FXML
+    private Label secondTeamLabel;
 
     @FXML
     private Label firstTeamScoreLabel;
@@ -24,6 +34,11 @@ public class ScoreBoardSceneController {
 
     @FXML
     private Label timeLeftLabel;
+
+    @FXML
+    private GridPane firstTeamShootersGridPane;
+
+    @FXML GridPane secondTeamShootersGridPane;
 
     @FXML
     private void initialize(){
@@ -88,6 +103,109 @@ public class ScoreBoardSceneController {
     }
 
     public void removeSecondTeamGoal(){
-        secondTeamScoreLabel.setText(String.valueOf(Integer.parseInt(firstTeamScoreLabel.getText()) - 1));
+        secondTeamScoreLabel.setText(String.valueOf(Integer.parseInt(secondTeamScoreLabel.getText()) - 1));
+    }
+
+    public String getFirstTeamScore(){
+        return firstTeamScoreLabel.getText();
+    }
+
+    public void setFirstTeamScore(String score){
+        firstTeamScoreLabel.setText(score);
+    }
+
+    public String getSecondTeamScore(){
+        return secondTeamScoreLabel.getText();
+    }
+
+    public void setSecondTeamScore(String score){
+        secondTeamScoreLabel.setText(score);
+    }
+
+    public String getFirstTeamName(){
+        return firstTeamLabel.getText();
+    }
+
+    public void setFirstTeamLabel(String name){
+        firstTeamLabel.setText(name);
+    }
+
+    public String getSecondTeamName(){
+        return secondTeamLabel.getText();
+    }
+
+    public void setSecondTeamLabel(String name){
+        secondTeamLabel.setText(name);
+    }
+
+    public List<String> getFirstTeamShooters() {
+        ObservableList<Node> children = firstTeamShootersGridPane.getChildren();
+        List<String> shooters = new ArrayList<>();
+
+        for (Node node : children) {
+            if (node instanceof Label) {
+                Label label = (Label) node;
+                String text = label.getText();
+                shooters.add(text);
+            }
+        }
+
+        return shooters;
+    }
+
+    public void setFirstTeamShootersGridPane(List<String> shooters){
+        secondTeamShootersGridPane.getChildren().clear();
+        for(int i = 0; i < shooters.size(); i++){
+            Label label = new Label(shooters.get(i));
+            label.setFont(new Font(24));
+            secondTeamShootersGridPane.addRow(i, label);
+        }
+    }
+
+    public void removeFirstTeamShooter(){
+        firstTeamShootersGridPane.getChildren().remove(firstTeamShootersGridPane.getRowCount() - 1);
+    }
+
+    public void addFirstTeamShooter(Player player){
+        Label label = new Label(player.getName());
+        label.setFont(new Font(24));
+        int rowCount = firstTeamShootersGridPane.getRowCount();
+        // Pridanie nového prvku na vrch
+        firstTeamShootersGridPane.addRow(rowCount, label);
+    }
+
+    public List<String> getSecondTeamShooters() {
+        ObservableList<Node> children = secondTeamShootersGridPane.getChildren();
+        List<String> shooters = new ArrayList<>();
+
+        for (Node node : children) {
+            if (node instanceof Label) {
+                Label label = (Label) node;
+                String text = label.getText();
+                shooters.add(text);
+            }
+        }
+
+        return shooters;
+    }
+
+    public void setSecondTeamShootersGridPane(List<String> shooters){
+        firstTeamShootersGridPane.getChildren().clear();
+        for(int i = 0; i < shooters.size(); i++){
+            Label label = new Label(shooters.get(i));
+            label.setFont(new Font(24));
+            firstTeamShootersGridPane.addRow(i, label);
+        }
+    }
+
+    public void removeSecondTeamShooter(){
+        secondTeamShootersGridPane.getChildren().remove(secondTeamShootersGridPane.getRowCount() - 1);
+    }
+
+    public void addSecondTeamShooter(Player player){
+        Label label = new Label(player.getName());
+        label.setFont(new Font(24));
+        int rowCount = secondTeamShootersGridPane.getRowCount();
+        secondTeamShootersGridPane.addRow(rowCount, label);
     }
 }

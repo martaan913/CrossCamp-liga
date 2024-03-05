@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
@@ -15,20 +17,35 @@
             <Font size="72.0" />
          </font>
       </Label>
-      <Label fx:id="firstTeamLabel" layoutX="325.0" layoutY="206.0" text="FirstTeam">
+      <Label fx:id="firstTeamLabel" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="197.0" prefHeight="70.0" prefWidth="374.0" text="FirstTeam">
          <font>
-            <Font size="24.0" />
+            <Font size="48.0" />
          </font>
       </Label>
-      <Label fx:id="firstTeamScore" layoutX="337.0" layoutY="313.0" text="0">
+      <Label fx:id="firstTeamScoreLabel" layoutX="323.0" layoutY="304.0" text="0">
          <font>
-            <Font size="146.0" />
+            <Font size="200.0" />
          </font>
       </Label>
-      <Label fx:id="secondTeamScore" layoutX="1017.0" layoutY="313.0" text="0">
+      <Label fx:id="secondTeamScoreLabel" layoutX="963.0" layoutY="304.0" text="0">
          <font>
-            <Font size="146.0" />
+            <Font size="200.0" />
          </font>
       </Label>
+      <Label fx:id="secondTeamLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="810.0" layoutY="189.0" prefHeight="70.0" prefWidth="414.0" text="Second Team" textAlignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <GridPane fx:id="firstTeamShootersGridPane" alignment="TOP_CENTER" layoutX="14.0" layoutY="304.0" prefHeight="292.0" prefWidth="227.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+      </GridPane>
+      <GridPane fx:id="secondTeamShootersGridPane" alignment="TOP_CENTER" layoutX="1125.0" layoutY="304.0" prefHeight="292.0" prefWidth="227.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+      </GridPane>
    </children>
 </AnchorPane>

@@ -70,12 +70,18 @@
          </font>
       </Label>
       <Button fx:id="addGoalSecondGoalieButton" layoutX="374.0" layoutY="454.0" mnemonicParsing="false" onAction="#onAddGoalSecondGoalie" text="GÓL!" />
-      <Button fx:id="openScoreBoardButton" layoutX="954.0" layoutY="138.0" mnemonicParsing="false" onAction="#onOpenScoreBoard" text="Spusti cas" />
+      <Button fx:id="startTimeButton" layoutX="986.0" layoutY="216.0" mnemonicParsing="false" onAction="#onStartTime" text="Spusti cas" />
       <TextField fx:id="timeTextField" layoutX="746.0" layoutY="216.0" />
       <Label layoutX="807.0" layoutY="192.0" text="Cas zapasu" />
       <Button fx:id="setTimeButton" layoutX="902.0" layoutY="216.0" mnemonicParsing="false" onAction="#onSetTime" text="Nastav cas" />
       <Button fx:id="removeFirstTeamGoalButton" layoutX="811.0" layoutY="350.0" mnemonicParsing="false" onAction="#onRemoveFirstTeamGoal" text="odober gol" />
-      <Button layoutX="1124.0" layoutY="350.0" mnemonicParsing="false" text="odober gol" />
+      <Button fx:id="removeSecondTeamGoalButton" layoutX="1124.0" layoutY="350.0" mnemonicParsing="false" onAction="#onRemoveSecondTeamGoal" text="odober gol" />
       <Button fx:id="stopTimeButton" layoutX="1066.0" layoutY="216.0" mnemonicParsing="false" onAction="#onStopTime" text="Stopni cas" />
+      <Button fx:id="startMatchButton" layoutX="934.0" layoutY="124.0" mnemonicParsing="false" onAction="#onStartMatch" text="Zacni zapas" />
+      <Button fx:id="halfTimeButton" layoutX="1029.0" layoutY="124.0" mnemonicParsing="false" onAction="#onHalfTime" text="Polcas" />
+      <TextField fx:id="firstTeamNameTextField" layoutX="746.0" layoutY="263.0" />
+      <TextField fx:id="secondTeamNameTextField" layoutX="1050.0" layoutY="263.0" />
+      <Button fx:id="setFirstTeamNameButton" layoutX="908.0" layoutY="263.0" mnemonicParsing="false" onAction="#onSetFirstTeamName" text="nastav 1 meno" />
+      <Button fx:id="setSecondTeamNameButton" layoutX="1207.0" layoutY="263.0" mnemonicParsing="false" onAction="#onSetSecondTeamName" text="Nastav2meno" />
    </children>
 </AnchorPane>

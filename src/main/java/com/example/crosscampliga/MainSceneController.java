@@ -30,13 +30,29 @@ public class MainSceneController {
     private Button addGoalFirstGoalieButton;
 
     @FXML
+    private Button startMatchButton;
+    @FXML
+    private Button halfTimeButton;
+    @FXML
     private Button setTimeButton;
     @FXML
     private TextField timeTextField;
     @FXML
     private Button stopTimeButton;
     @FXML
+    private TextField firstTeamNameTextField;
+    @FXML
+    private Button setFirstTeamNameButton;
+    @FXML
+    private TextField secondTeamNameTextField;
+    @FXML
+    private Button setSecondTeamNameButton;
+
+    @FXML
     private Button removeFirstTeamGoalButton;
+    @FXML
+    private Button removeSecondTeamGoalButton;
+
     @FXML
     private Button addGoalSecondGoalieButton;
 
@@ -151,6 +167,8 @@ public class MainSceneController {
         List<Player> goalies = playerDao.getAllGoalies();
         goaliesModel = FXCollections.observableList(goalies);
         goalieChoiceBox.setItems(goaliesModel);
+
+        timeTextField.setText("4:00");
     }
 
     @FXML
@@ -248,10 +266,12 @@ public class MainSceneController {
 
         alert.showAndWait();
 
+        scoreBoardSceneController.firstTeamGoal();
+
+        scoreBoardSceneController.addFirstTeamShooter(selectedShooter);
+
         selectedShooter = null;
         selectedAssist = null;
-
-        scoreBoardSceneController.firstTeamGoal();
     }
 
     @FXML
@@ -303,6 +323,10 @@ public class MainSceneController {
         alert.setContentText(selectedShooter + " " + selectedAssist);
 
         alert.showAndWait();
+
+        scoreBoardSceneController.secondTeamGoal();
+
+        scoreBoardSceneController.addSecondTeamShooter(selectedShooter);
 
         selectedShooter = null;
         selectedAssist = null;
@@ -400,21 +424,31 @@ public class MainSceneController {
         this.scoreBoardSceneController = controller;
     }
 
-
     @FXML
-    void onOpenScoreBoard(ActionEvent event) {
+    void onStartMatch(ActionEvent event){
         if (scoreBoardSceneController != null) {
-            scoreBoardSceneController.startCountdown();
+            setTime();
+            scoreBoardSceneController.stopCountdown();
             scoreBoardSceneController.startGame();
         }
     }
-
     @FXML
-    void onSetTime(){
+    void onStartTime(ActionEvent event) {
+        if (scoreBoardSceneController != null) {
+            scoreBoardSceneController.startCountdown();
+        }
+    }
+
+    public void setTime(){
         String[] cas = timeTextField.getText().split(":");
         int min = Integer.parseInt(cas[0]);
         int sec = Integer.parseInt(cas[1]);
         scoreBoardSceneController.setTime(min, sec);
+    }
+
+    @FXML
+    void onSetTime(){
+        setTime();
     }
 
     @FXML
@@ -425,5 +459,42 @@ public class MainSceneController {
     @FXML
     void onRemoveFirstTeamGoal(){
         scoreBoardSceneController.removeFirstTeamGoal();
+        scoreBoardSceneController.removeFirstTeamShooter();
+    }
+
+    @FXML
+    void onRemoveSecondTeamGoal(){
+        scoreBoardSceneController.removeSecondTeamGoal();
+        scoreBoardSceneController.removeSecondTeamShooter();
+    }
+
+    @FXML
+    void onHalfTime(){
+        String firstTeamScore = scoreBoardSceneController.getFirstTeamScore();
+        String secondTeamScore = scoreBoardSceneController.getSecondTeamScore();
+        scoreBoardSceneController.setFirstTeamScore(secondTeamScore);
+        scoreBoardSceneController.setSecondTeamScore(firstTeamScore);
+
+        setTime();
+
+        String firstTeamName = scoreBoardSceneController.getFirstTeamName();
+        String secondTeamName = scoreBoardSceneController.getSecondTeamName();
+        scoreBoardSceneController.setFirstTeamLabel(secondTeamName);
+        scoreBoardSceneController.setSecondTeamLabel(firstTeamName);
+
+        List<String> firstTeamShooters = scoreBoardSceneController.getFirstTeamShooters();
+        List<String> secondTeamShooters = scoreBoardSceneController.getSecondTeamShooters();
+        scoreBoardSceneController.setFirstTeamShootersGridPane(firstTeamShooters);
+        scoreBoardSceneController.setSecondTeamShootersGridPane(secondTeamShooters);
+    }
+
+    @FXML
+    void onSetFirstTeamName(){
+        scoreBoardSceneController.setFirstTeamLabel(firstTeamNameTextField.getText());
+    }
+
+    @FXML
+    void onSetSecondTeamName(){
+        scoreBoardSceneController.setSecondTeamLabel(secondTeamNameTextField.getText());
     }
 }
