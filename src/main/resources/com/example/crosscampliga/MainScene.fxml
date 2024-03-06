@@ -23,7 +23,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="765.0" layoutY="23.0" text="Crosscamp liga štatistika">
+      <Label layoutX="308.0" layoutY="14.0" text="Crosscamp liga štatistika">
          <font>
             <Font size="36.0" />
          </font>
@@ -53,35 +53,53 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="refreshTableButton" layoutX="597.0" layoutY="761.0" mnemonicParsing="false" onAction="#onRefreshTable" prefHeight="0.0" prefWidth="122.0" text="Otvor statistiku" />
+      <Button fx:id="refreshTableButton" layoutX="616.0" layoutY="137.0" mnemonicParsing="false" onAction="#onRefreshTable" prefHeight="0.0" prefWidth="122.0" text="Otvor statistiku" />
       <ChoiceBox fx:id="goalieChoiceBox" layoutX="53.0" layoutY="290.0" prefWidth="150.0" />
       <Button fx:id="addFirstGoalieButton" layoutX="243.0" layoutY="290.0" mnemonicParsing="false" onAction="#onAddFirstGoalie" text="Pridaj 1. brankara" />
       <Button fx:id="addSecondGoalieButton" layoutX="395.0" layoutY="290.0" mnemonicParsing="false" onAction="#onAddSecondGoalie" text="Pridaj 2. brankara" />
       <Button fx:id="addFirstGoalieSaveButton" layoutX="102.0" layoutY="428.0" mnemonicParsing="false" onAction="#onAddFirstGoalieSave" text="Zakrok" />
       <Button fx:id="addSecondGoalieSaveButton" layoutX="369.0" layoutY="428.0" mnemonicParsing="false" onAction="#onAddSecondGoalieSave" text="Zakrok" />
-      <Label fx:id="firstGoalieNameLabel" layoutX="37.0" layoutY="391.0" text="Meno prveho brankara">
+      <Label fx:id="firstGoalieNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="391.0" text="Meno prveho brankara" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="secondGoalieNameLabel" layoutX="298.0" layoutY="391.0" text="Meno druheho brankara">
+      <Label fx:id="secondGoalieNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="298.0" layoutY="391.0" text="Meno druheho brankara" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <Button fx:id="addGoalSecondGoalieButton" layoutX="374.0" layoutY="454.0" mnemonicParsing="false" onAction="#onAddGoalSecondGoalie" text="GÓL!" />
-      <Button fx:id="startTimeButton" layoutX="986.0" layoutY="216.0" mnemonicParsing="false" onAction="#onStartTime" text="Spusti cas" />
-      <TextField fx:id="timeTextField" layoutX="746.0" layoutY="216.0" />
-      <Label layoutX="807.0" layoutY="192.0" text="Cas zapasu" />
-      <Button fx:id="setTimeButton" layoutX="902.0" layoutY="216.0" mnemonicParsing="false" onAction="#onSetTime" text="Nastav cas" />
-      <Button fx:id="removeFirstTeamGoalButton" layoutX="811.0" layoutY="350.0" mnemonicParsing="false" onAction="#onRemoveFirstTeamGoal" text="odober gol" />
-      <Button fx:id="removeSecondTeamGoalButton" layoutX="1124.0" layoutY="350.0" mnemonicParsing="false" onAction="#onRemoveSecondTeamGoal" text="odober gol" />
-      <Button fx:id="stopTimeButton" layoutX="1066.0" layoutY="216.0" mnemonicParsing="false" onAction="#onStopTime" text="Stopni cas" />
-      <Button fx:id="startMatchButton" layoutX="934.0" layoutY="124.0" mnemonicParsing="false" onAction="#onStartMatch" text="Zacni zapas" />
-      <Button fx:id="halfTimeButton" layoutX="1029.0" layoutY="124.0" mnemonicParsing="false" onAction="#onHalfTime" text="Polcas" />
-      <TextField fx:id="firstTeamNameTextField" layoutX="746.0" layoutY="263.0" />
-      <TextField fx:id="secondTeamNameTextField" layoutX="1050.0" layoutY="263.0" />
-      <Button fx:id="setFirstTeamNameButton" layoutX="908.0" layoutY="263.0" mnemonicParsing="false" onAction="#onSetFirstTeamName" text="nastav 1 meno" />
-      <Button fx:id="setSecondTeamNameButton" layoutX="1207.0" layoutY="263.0" mnemonicParsing="false" onAction="#onSetSecondTeamName" text="Nastav2meno" />
+      <Button fx:id="startTimeButton" layoutX="1045.0" layoutY="563.0" mnemonicParsing="false" onAction="#onStartTime" text="Spusti čas" />
+      <TextField fx:id="timeTextField" layoutX="793.0" layoutY="563.0" prefHeight="25.0" prefWidth="165.0" />
+      <Label layoutX="794.0" layoutY="536.0" text="Dĺžka zápasu(mm:ss)">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Button fx:id="setTimeButton" layoutX="965.0" layoutY="563.0" mnemonicParsing="false" onAction="#onSetTime" text="Nastav čas" />
+      <Button fx:id="removeFirstTeamGoalButton" layoutX="829.0" layoutY="761.0" mnemonicParsing="false" onAction="#onRemoveFirstTeamGoal" text="Odober gól" />
+      <Button fx:id="removeSecondTeamGoalButton" layoutX="1118.0" layoutY="761.0" mnemonicParsing="false" onAction="#onRemoveSecondTeamGoal" text="Odober gól" />
+      <Button fx:id="stopTimeButton" layoutX="1121.0" layoutY="563.0" mnemonicParsing="false" onAction="#onStopTime" text="Stop čas" />
+      <Button fx:id="startMatchButton" layoutX="919.0" layoutY="498.0" mnemonicParsing="false" onAction="#onStartMatch" text="Začni zápas" />
+      <Button fx:id="halfTimeButton" layoutX="1029.0" layoutY="498.0" mnemonicParsing="false" onAction="#onHalfTime" text="Polčas" />
+      <TextField fx:id="firstTeamNameTextField" layoutX="792.0" layoutY="678.0" />
+      <TextField fx:id="secondTeamNameTextField" layoutX="1082.0" layoutY="678.0" />
+      <Button fx:id="setFirstTeamNameButton" layoutX="819.0" layoutY="723.0" mnemonicParsing="false" onAction="#onSetFirstTeamName" text="Nastav meno tímu" />
+      <Button fx:id="setSecondTeamNameButton" layoutX="1112.0" layoutY="723.0" mnemonicParsing="false" onAction="#onSetSecondTeamName" text="Nastav meno tímu" />
+      <Label layoutX="851.0" layoutY="402.0" text="Ovládanie ScoreBoard">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="1118.0" layoutY="644.0" text="Tím vpravo">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="828.0" layoutY="644.0" text="Tím vľavo">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

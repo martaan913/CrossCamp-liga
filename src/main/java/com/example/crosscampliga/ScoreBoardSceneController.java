@@ -6,12 +6,19 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +64,7 @@ public class ScoreBoardSceneController {
             secondsRemaining--;
             if (secondsRemaining <= 0) {
                 timeline.stop();
+                playSound();
             }
             updateTimerLabel();
         }));
@@ -158,6 +166,7 @@ public class ScoreBoardSceneController {
         for(int i = 0; i < shooters.size(); i++){
             Label label = new Label(shooters.get(i));
             label.setFont(new Font(24));
+            label.setAlignment(Pos.CENTER_RIGHT);
             secondTeamShootersGridPane.addRow(i, label);
         }
     }
@@ -205,7 +214,22 @@ public class ScoreBoardSceneController {
     public void addSecondTeamShooter(Player player){
         Label label = new Label(player.getName());
         label.setFont(new Font(24));
+        GridPane.setHalignment(label, HPos.RIGHT);
         int rowCount = secondTeamShootersGridPane.getRowCount();
         secondTeamShootersGridPane.addRow(rowCount, label);
+    }
+
+    public void playSound() {
+        String soundPath = "src/main/resources/sound/airHorn.mp3";
+        Media sound = new Media(new File(soundPath).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        System.out.println("koniec zapasu");
+
+        mediaPlayer.setOnEndOfMedia(() -> {
+            mediaPlayer.stop();
+            mediaPlayer.dispose();
+        });
+
+        mediaPlayer.play();
     }
 }

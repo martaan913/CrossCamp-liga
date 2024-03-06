@@ -6,6 +6,7 @@ module com.example.crosscampliga {
     requires mysql.connector.j;
     requires java.sql;
     requires java.naming;
+    requires javafx.media;
 
 
     opens com.example.crosscampliga to javafx.fxml;
