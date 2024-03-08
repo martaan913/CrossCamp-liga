@@ -6,40 +6,39 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView fx:id="goalsStandingsTable" layoutX="14.0" layoutY="26.0" prefHeight="112.0" prefWidth="433.0">
+      <TableView fx:id="goalsStandingsTable" layoutX="35.0" layoutY="70.0" prefHeight="115.0" prefWidth="430.0">
          <columns>
             <TableColumn fx:id="nameGoalsColumn" editable="false" prefWidth="323.0" resizable="false" sortable="false" text="Meno" />
-            <TableColumn fx:id="numGoalsColumn" editable="false" prefWidth="109.0" resizable="false" text="Goly" />
+            <TableColumn fx:id="numGoalsColumn" editable="false" prefWidth="109.0" resizable="false" text="Góly" />
          </columns>
       </TableView>
-      <TableView fx:id="assistsStandingsTable" layoutX="14.0" layoutY="158.0" prefHeight="139.0" prefWidth="433.0">
+      <TableView fx:id="assistsStandingsTable" layoutX="35.0" layoutY="260.0" prefHeight="115.0" prefWidth="430.0">
          <columns>
             <TableColumn fx:id="nameAssistsColumn" editable="false" prefWidth="317.0" resizable="false" sortable="false" text="Meno" />
             <TableColumn fx:id="numAssistsColumn" editable="false" maxWidth="307.0" prefWidth="115.0" resizable="false" text="Asistencie" />
          </columns>
       </TableView>
-      <TableView fx:id="goalieSavesTable" layoutX="21.0" layoutY="274.0" prefHeight="112.0" prefWidth="433.0">
+      <TableView fx:id="goalieSavesTable" layoutX="35.0" layoutY="450.0" prefHeight="100.0" prefWidth="430.0">
          <columns>
             <TableColumn fx:id="nameGoalieColumn" editable="false" prefWidth="323.0" resizable="false" sortable="false" text="Meno" />
-            <TableColumn fx:id="percentageSavesColumn" editable="false" prefWidth="109.0" resizable="false" text="zakroky %" />
+            <TableColumn fx:id="percentageSavesColumn" editable="false" prefWidth="109.0" resizable="false" text="Zákroky v %" />
          </columns>
       </TableView>
-      <Label layoutX="426.0" layoutY="57.0" text="Najlepsi strelec">
+      <Label layoutX="35.0" layoutY="5.0" prefHeight="55.0" prefWidth="430.0" text="Najlepší strelec">
          <font>
-            <Font size="24.0" />
+            <Font size="36.0" />
          </font>
       </Label>
-      <Label layoutX="454.0" layoutY="193.0" text="Najlepsi nahravac">
+      <Label layoutX="35.0" layoutY="195.0" prefHeight="55.0" prefWidth="430.0" text="Najlepší nahrávač">
          <font>
-            <Font size="24.0" />
+            <Font size="36.0" />
          </font>
       </Label>
-      <Label layoutX="454.0" layoutY="313.0" text="Statistika brankarov">
+      <Label layoutX="35.0" layoutY="385.0" prefHeight="55.0" prefWidth="430.0" text="Štatistika brankárov">
          <font>
-            <Font size="24.0" />
+            <Font size="36.0" />
          </font>
       </Label>
    </children>

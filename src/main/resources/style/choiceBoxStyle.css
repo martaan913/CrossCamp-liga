@@ -1,0 +1,15 @@
+.choice-box{
+    -fx-background-color: #333333;
+    -fx-border-color: #532a1e;
+    -fx-control-inner-background: #F46424;
+    -fx-control-inner-bordercolor: #532a1e;
+    -fx-selection-bar: #333333;
+}
+
+.choice-box .menu-item .label{
+    -fx-text-fill: #333333;
+}
+
+.choice-box .menu-item:focused .label{
+    -fx-text-fill: #F46424;
+}

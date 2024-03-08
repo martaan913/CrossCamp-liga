@@ -3,10 +3,7 @@ package com.example.crosscampliga;
 import com.example.crosscampliga.storage.DaoFactory;
 import com.example.crosscampliga.storage.Player;
 import com.example.crosscampliga.storage.PlayerDao;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,13 +11,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -333,23 +328,24 @@ public class MainSceneController {
     }
     @FXML
     void onRefreshTable(ActionEvent event) {
-//        nameGoalsColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-//        numGoalsColumn.setCellValueFactory(new PropertyValueFactory<>("goals"));
-//        goalsStandingsTable.setItems(FXCollections.observableList(playerDao.getAll()));
-//        numGoalsColumn.setSortType(TableColumn.SortType.DESCENDING);
-//        goalsStandingsTable.getSortOrder().add(numGoalsColumn);
-//        goalsStandingsTable.sort();
-//
-//        nameAssistsColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-//        numAssistsColumn.setCellValueFactory(new PropertyValueFactory<>("assists"));
-//        assistsStandingsTable.setItems(FXCollections.observableList(playerDao.getAll()));
-//        numAssistsColumn.setSortType(TableColumn.SortType.DESCENDING);
-//        assistsStandingsTable.getSortOrder().add(numAssistsColumn);
-//        assistsStandingsTable.sort();
-//
-//        List<Player> goalies = playerDao.getAllGoalies();
-//        goaliesModel = FXCollections.observableList(goalies);
-//        goalieSavesTable.setItems(goaliesModel);
+        try {
+            StatisticsSceneController controller = new StatisticsSceneController();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("StatisticsScene.fxml"));
+            loader.setController(controller);
+            Parent parent = loader.load();
+            Scene scene = new Scene(parent);
+            Stage statisticsStage = new Stage();
+            statisticsStage.setScene(scene);
+            statisticsStage.show();
+            String mainCss = this.getClass().getResource("/style/mainStyle.css").toExternalForm();
+            scene.getStylesheets().add(mainCss);
+            String tableViewCss = this.getClass().getResource("/style/tableViewStyle.css").toExternalForm();
+            scene.getStylesheets().add(tableViewCss);
+            statisticsStage.setTitle("CrossCamp - Liga");
+            statisticsStage.getIcons().add(new javafx.scene.image.Image("file:src/main/resources/images/logo.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

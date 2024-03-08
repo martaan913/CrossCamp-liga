@@ -1,0 +1,48 @@
+.list-view{
+    -fx-border-color: #532a1e;
+    -fx-background-color: #532a1e;
+    -fx-border-width: 2px;
+}
+
+.list-cell {
+    -fx-background-color: #F46424;
+    -fx-border-color: #F46424;
+    -fx-text-fill: #222222;
+}
+
+.list-cell:odd {
+    -fx-background-color: #E35413;
+    -fx-border-color: #E35413;
+    -fx-text-fill: #222222;
+}
+
+.list-cell:selected{
+    -fx-background-color: #222222;
+    -fx-text-fill: #F46424;
+}
+
+/*styling for scrollBar*/
+.list-view > .virtual-flow > .scroll-bar:vertical,
+.list-view > .virtual-flow > .scroll-bar:vertical > .track,
+.list-view > .virtual-flow > .scroll-bar:vertical > .track-background,
+.list-view > .virtual-flow > .scroll-bar:horizontal,
+.list-view > .virtual-flow > .scroll-bar:horizontal > .track,
+.list-view > .virtual-flow > .scroll-bar:horizontal > .track-background {
+    -fx-background-color: #222222;
+}
+
+.list-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color:  linear-gradient(to bottom, #E35413, #F46424);
+}
+.list-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color:  linear-gradient(to right,  #E35413, #F46424);
+}
+
+.list-view .corner{
+    -fx-background-color: #222222;
+}
+
+.list-view > .virtual-flow > .scroll-bar > .increment-button,
+.list-view > .virtual-flow > .scroll-bar > .decrement-button {
+    -fx-background-color: #222222;
+}
