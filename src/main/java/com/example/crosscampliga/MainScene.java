@@ -62,7 +62,7 @@ public class MainScene extends Application {
         secondaryStage.setResizable(true);
         secondaryStage.initStyle(StageStyle.TRANSPARENT);
         secondaryStage.getIcons().add(new javafx.scene.image.Image("file:src/main/resources/images/logo.png"));
-        //secondaryStage.show();
+        secondaryStage.show();
 
         //making borderless ScoreBoard movable
         parentScoreBoard.setOnMousePressed(new EventHandler<MouseEvent>() {

@@ -25,6 +25,10 @@ public class MainSceneController {
     private Button addGoalFirstGoalieButton;
 
     @FXML
+    private Button addFirstTeamGoal;
+    @FXML
+    private Button addSecondTeamButton;
+    @FXML
     private Button startMatchButton;
     @FXML
     private Button halfTimeButton;
@@ -482,6 +486,15 @@ public class MainSceneController {
         List<String> secondTeamShooters = scoreBoardSceneController.getSecondTeamShooters();
         scoreBoardSceneController.setFirstTeamShootersGridPane(firstTeamShooters);
         scoreBoardSceneController.setSecondTeamShootersGridPane(secondTeamShooters);
+    }
+
+    @FXML
+    void onAddSecondTeam(ActionEvent event) {
+        scoreBoardSceneController.secondTeamGoal();
+    }
+    @FXML
+    void onAddFirstTeamGoal(ActionEvent event) {
+        scoreBoardSceneController.firstTeamGoal();
     }
 
     @FXML
