@@ -33,21 +33,21 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="110.0" layoutY="493.0" text="Gól">
+      <Label layoutX="541.0" layoutY="310.0" text="Gól">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <ListView fx:id="goalShooterListView" layoutX="13.0" layoutY="528.0" prefHeight="232.0" prefWidth="230.0" />
-      <TextField fx:id="goalShooterTextField" layoutX="13.0" layoutY="760.0" prefHeight="26.0" prefWidth="230.0" />
-      <ListView fx:id="goalAssistListView" layoutX="249.0" layoutY="528.0" prefHeight="232.0" prefWidth="230.0" />
-      <TextField fx:id="goalAssistTextField" layoutX="249.0" layoutY="760.0" prefHeight="26.0" prefWidth="230.0" />
-      <Label layoutX="314.0" layoutY="493.0" text="Asistencia">
+      <ListView fx:id="goalShooterListView" layoutX="444.0" layoutY="345.0" prefHeight="232.0" prefWidth="230.0" />
+      <TextField fx:id="goalShooterTextField" layoutX="444.0" layoutY="577.0" prefHeight="26.0" prefWidth="230.0" />
+      <ListView fx:id="goalAssistListView" layoutX="680.0" layoutY="345.0" prefHeight="232.0" prefWidth="230.0" />
+      <TextField fx:id="goalAssistTextField" layoutX="680.0" layoutY="577.0" prefHeight="26.0" prefWidth="230.0" />
+      <Label layoutX="745.0" layoutY="310.0" text="Asistencia">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="addGoalFirstGoalieButton" layoutX="107.0" layoutY="454.0" mnemonicParsing="false" onAction="#onAddGoalFirstGoalie" text="GÓL!" />
+      <Button fx:id="addGoalFirstGoalieButton" layoutX="89.0" layoutY="419.0" mnemonicParsing="false" onAction="#onAddGoalFirstGoalie" text="GÓL!" />
       <Label layoutX="148.0" layoutY="228.0" text="Zákroky brankárov">
          <font>
             <Font size="24.0" />
@@ -57,51 +57,51 @@
       <ChoiceBox fx:id="goalieChoiceBox" layoutX="53.0" layoutY="290.0" prefWidth="150.0" />
       <Button fx:id="addFirstGoalieButton" layoutX="243.0" layoutY="290.0" mnemonicParsing="false" onAction="#onAddFirstGoalie" text="Pridaj 1. brankara" />
       <Button fx:id="addSecondGoalieButton" layoutX="395.0" layoutY="290.0" mnemonicParsing="false" onAction="#onAddSecondGoalie" text="Pridaj 2. brankara" />
-      <Button fx:id="addFirstGoalieSaveButton" layoutX="102.0" layoutY="428.0" mnemonicParsing="false" onAction="#onAddFirstGoalieSave" text="Zakrok" />
-      <Button fx:id="addSecondGoalieSaveButton" layoutX="369.0" layoutY="428.0" mnemonicParsing="false" onAction="#onAddSecondGoalieSave" text="Zakrok" />
-      <Label fx:id="firstGoalieNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="391.0" text="Meno prveho brankara" textAlignment="CENTER">
+      <Button fx:id="addFirstGoalieSaveButton" layoutX="84.0" layoutY="393.0" mnemonicParsing="false" onAction="#onAddFirstGoalieSave" text="Zakrok" />
+      <Button fx:id="addSecondGoalieSaveButton" layoutX="282.0" layoutY="399.0" mnemonicParsing="false" onAction="#onAddSecondGoalieSave" text="Zakrok" />
+      <Label fx:id="firstGoalieNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="356.0" text="Meno prveho brankara" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="secondGoalieNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="298.0" layoutY="391.0" text="Meno druheho brankara" textAlignment="CENTER">
+      <Label fx:id="secondGoalieNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="211.0" layoutY="362.0" text="Meno druheho brankara" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="addGoalSecondGoalieButton" layoutX="374.0" layoutY="454.0" mnemonicParsing="false" onAction="#onAddGoalSecondGoalie" text="GÓL!" />
-      <Button fx:id="startTimeButton" layoutX="1045.0" layoutY="563.0" mnemonicParsing="false" onAction="#onStartTime" text="Spusti čas" />
-      <TextField fx:id="timeTextField" layoutX="793.0" layoutY="563.0" prefHeight="25.0" prefWidth="165.0" />
-      <Label layoutX="794.0" layoutY="536.0" text="Dĺžka zápasu(mm:ss)">
+      <Button fx:id="addGoalSecondGoalieButton" layoutX="287.0" layoutY="425.0" mnemonicParsing="false" onAction="#onAddGoalSecondGoalie" text="GÓL!" />
+      <Button fx:id="startTimeButton" layoutX="1077.0" layoutY="180.0" mnemonicParsing="false" onAction="#onStartTime" text="Spusti čas" />
+      <TextField fx:id="timeTextField" layoutX="825.0" layoutY="180.0" prefHeight="25.0" prefWidth="165.0" />
+      <Label layoutX="826.0" layoutY="153.0" text="Dĺžka zápasu(mm:ss)">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Button fx:id="setTimeButton" layoutX="965.0" layoutY="563.0" mnemonicParsing="false" onAction="#onSetTime" text="Nastav čas" />
-      <Button fx:id="removeFirstTeamGoalButton" layoutX="888.0" layoutY="748.0" mnemonicParsing="false" onAction="#onRemoveFirstTeamGoal" text="Odober gól" />
-      <Button fx:id="removeSecondTeamGoalButton" layoutX="1157.0" layoutY="748.0" mnemonicParsing="false" onAction="#onRemoveSecondTeamGoal" text="Odober gól" />
-      <Button fx:id="stopTimeButton" layoutX="1121.0" layoutY="563.0" mnemonicParsing="false" onAction="#onStopTime" text="Stop čas" />
-      <Button fx:id="startMatchButton" layoutX="919.0" layoutY="498.0" mnemonicParsing="false" onAction="#onStartMatch" text="Začni zápas" />
-      <Button fx:id="halfTimeButton" layoutX="1029.0" layoutY="498.0" mnemonicParsing="false" onAction="#onHalfTime" text="Polčas" />
-      <TextField fx:id="firstTeamNameTextField" layoutX="792.0" layoutY="678.0" />
-      <TextField fx:id="secondTeamNameTextField" layoutX="1082.0" layoutY="678.0" />
-      <Button fx:id="setFirstTeamNameButton" layoutX="794.0" layoutY="711.0" mnemonicParsing="false" onAction="#onSetFirstTeamName" text="Nastav meno tímu" />
-      <Button fx:id="setSecondTeamNameButton" layoutX="1114.0" layoutY="711.0" mnemonicParsing="false" onAction="#onSetSecondTeamName" text="Nastav meno tímu" />
-      <Label layoutX="851.0" layoutY="402.0" text="Ovládanie ScoreBoard">
+      <Button fx:id="setTimeButton" layoutX="997.0" layoutY="180.0" mnemonicParsing="false" onAction="#onSetTime" text="Nastav čas" />
+      <Button fx:id="removeFirstTeamGoalButton" layoutX="1016.0" layoutY="367.0" mnemonicParsing="false" onAction="#onRemoveFirstTeamGoal" text="Odober gól" />
+      <Button fx:id="removeSecondTeamGoalButton" layoutX="1189.0" layoutY="365.0" mnemonicParsing="false" onAction="#onRemoveSecondTeamGoal" text="Odober gól" />
+      <Button fx:id="stopTimeButton" layoutX="1153.0" layoutY="180.0" mnemonicParsing="false" onAction="#onStopTime" text="Stop čas" />
+      <Button fx:id="startMatchButton" layoutX="951.0" layoutY="115.0" mnemonicParsing="false" onAction="#onStartMatch" text="Začni zápas" />
+      <Button fx:id="halfTimeButton" layoutX="1061.0" layoutY="115.0" mnemonicParsing="false" onAction="#onHalfTime" text="Polčas" />
+      <TextField fx:id="firstTeamNameTextField" layoutX="920.0" layoutY="297.0" />
+      <TextField fx:id="secondTeamNameTextField" layoutX="1114.0" layoutY="295.0" />
+      <Button fx:id="setFirstTeamNameButton" layoutX="922.0" layoutY="330.0" mnemonicParsing="false" onAction="#onSetFirstTeamName" text="Nastav meno tímu" />
+      <Button fx:id="setSecondTeamNameButton" layoutX="1146.0" layoutY="328.0" mnemonicParsing="false" onAction="#onSetSecondTeamName" text="Nastav meno tímu" />
+      <Label layoutX="883.0" layoutY="19.0" text="Ovládanie ScoreBoard">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="1118.0" layoutY="644.0" text="Tím vpravo">
+      <Label layoutX="1150.0" layoutY="261.0" text="Tím vpravo">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="828.0" layoutY="644.0" text="Tím vľavo">
+      <Label layoutX="956.0" layoutY="263.0" text="Tím vľavo">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="addFirstTeamGoal" layoutX="792.0" layoutY="749.0" mnemonicParsing="false" onAction="#onAddFirstTeamGoal" text="Pridaj gól" />
-      <Button fx:id="addSecondTeamButton" layoutX="1081.0" layoutY="749.0" mnemonicParsing="false" onAction="#onAddSecondTeam" text="Pridaj gól" />
+      <Button fx:id="addFirstTeamGoal" layoutX="920.0" layoutY="368.0" mnemonicParsing="false" onAction="#onAddFirstTeamGoal" text="Pridaj gól" />
+      <Button fx:id="addSecondTeamButton" layoutX="1113.0" layoutY="366.0" mnemonicParsing="false" onAction="#onAddSecondTeam" text="Pridaj gól" />
    </children>
 </AnchorPane>
